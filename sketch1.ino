@@ -545,11 +545,21 @@ void handleButton() {
 
         lastActivity = now;
 
-        if (idleMode) {
+        if (screenOff) {
+          display.oled_command(SH110X_DISPLAYON);
+          screenOff = false;
+          if (idleMode) {
+            if (imageMode && savedImageAvailable) drawPhoto();
+            else drawRobotEyes();
+          } else {
+            updatePage();
+          }
+        } else if (idleMode) {
 
           idleMode = false;
           imageMode = false;
           currentPage = 0;
+          updatePage();
 
         } else {
 
@@ -558,9 +568,8 @@ void handleButton() {
           if (currentPage >= 3) {
             currentPage = 0;
           }
+          updatePage();
         }
-
-        updatePage();
 
         Serial.print("Page: ");
         Serial.println(currentPage + 1);
