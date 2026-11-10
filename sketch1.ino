@@ -38,6 +38,9 @@ bool photoAnimRunning = false;
 unsigned long photoAnimStart = 0, nextPhotoAnim = 0, lastAnimFrame = 0;
 const unsigned long PHOTO_GAP = 5000;
 
+// Forward declaration: used by button and web handlers before its definition.
+void drawPhoto();
+
 const char WEB_PAGE[] PROGMEM = R"rawliteral(
 <!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ESP32 Robot</title><style>
